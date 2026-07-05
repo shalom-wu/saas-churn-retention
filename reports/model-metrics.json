@@ -1,0 +1,48 @@
+{
+  "n_train": 5634,
+  "n_test": 1409,
+  "churn_rate_test": 0.2654364797728886,
+  "logistic": {
+    "roc_auc": 0.8382288356712909,
+    "pr_auc": 0.6272203055756571,
+    "precision_at_0.5": 0.5078534031413613,
+    "recall_at_0.5": 0.7780748663101604,
+    "f1_at_0.5": 0.614572333685322,
+    "accuracy": 0.7409510290986515
+  },
+  "xgboost": {
+    "roc_auc": 0.8437650158877781,
+    "pr_auc": 0.6615349732806546,
+    "precision_at_0.5": 0.5184534270650264,
+    "recall_at_0.5": 0.7887700534759359,
+    "f1_at_0.5": 0.6256627783669141,
+    "accuracy": 0.7494677075940384
+  },
+  "logistic_cv_roc_auc": {
+    "mean": 0.8448821654823375,
+    "std": 0.012222006209731847
+  },
+  "xgboost_targeting": [
+    {
+      "campaign_depth": 0.1,
+      "customers_contacted": 141,
+      "precision": 0.7659574468085106,
+      "recall": 0.2887700534759358,
+      "lift_vs_random": 2.885652520195699
+    },
+    {
+      "campaign_depth": 0.2,
+      "customers_contacted": 282,
+      "precision": 0.6737588652482269,
+      "recall": 0.5080213903743316,
+      "lift_vs_random": 2.53830545757955
+    },
+    {
+      "campaign_depth": 0.3,
+      "customers_contacted": 423,
+      "precision": 0.5886524822695035,
+      "recall": 0.6657754010695187,
+      "lift_vs_random": 2.217677399780028
+    }
+  ]
+}
