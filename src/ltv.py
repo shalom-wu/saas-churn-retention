@@ -258,12 +258,11 @@ def plot_sensitivity_tornado(df: pd.DataFrame) -> str:
                     textcoords="offset points", va="center", fontsize=9,
                     color=PALETTE["dark"])
     ax.axvline(base, color=PALETTE["dark"], linewidth=1.2)
-    ax.annotate(f"base case ${base/1e6:,.1f}M",
-                xy=(base, 1.02), xycoords=("data", "axes fraction"),
-                xytext=(0, 2), textcoords="offset points", ha="center",
-                fontsize=9, color=PALETTE["dark"], fontweight="bold")
     ax.set_yticks(y, t["assumption"])
-    ax.set_title("Cost-of-churn estimate under low/high assumptions (tornado)")
+    # Base case goes in the title: an annotation at the top of the axvline
+    # collides with the title text at this figure size
+    ax.set_title(f"Cost-of-churn estimate under low/high assumptions "
+                 f"(base case ${base/1e6:,.1f}M, vertical line)")
     ax.set_xlabel("Total cost of the churned cohort (US$)")
     ax.xaxis.set_major_formatter(lambda x, _: f"${x/1e6:,.1f}M")
     ax.grid(axis="x")
