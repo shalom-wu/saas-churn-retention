@@ -1,0 +1,23 @@
+# Core analysis
+pandas>=2.2
+numpy>=1.26
+matplotlib>=3.8
+seaborn>=0.13
+
+# Modeling
+scikit-learn>=1.4
+xgboost>=2.0
+shap>=0.45
+
+# Deck generation
+python-pptx>=1.0
+
+# Notebooks
+jupyter-client>=8.0
+nbformat>=5.10
+nbclient>=0.10
+nbconvert>=7.16
+ipykernel>=6.29
+
+# Tests
+pytest>=8.0
