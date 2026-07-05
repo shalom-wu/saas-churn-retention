@@ -64,7 +64,7 @@ transfer directly, and the reframing is stated everywhere it matters. See
 ## Reproducing the analysis
 
 ```bash
-git clone <this-repo> && cd saas-churn-retention
+git clone https://github.com/shalom-wu/saas-churn-retention.git && cd saas-churn-retention
 pip install -r requirements.txt
 
 # Get the data (not redistributed here — see data-sources.md):
@@ -97,5 +97,6 @@ Python 3.11+ recommended. Notebooks re-execute with
 
 ## Author
 
-Shalom Wu — analysis, cost model, and strategy. Dataset credit: IBM /
-Kaggle (`blastchar/telco-customer-churn`). MIT licensed.
+Shalom Wu ([@shalom-wu](https://github.com/shalom-wu)) — analysis, cost
+model, and strategy. Dataset credit: IBM / Kaggle
+(`blastchar/telco-customer-churn`). MIT licensed.
