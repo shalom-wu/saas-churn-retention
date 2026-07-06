@@ -235,6 +235,22 @@ Finally, **SHAP** analysis opens the black box — for each prediction, it
 attributes the risk score across the customer's attributes, so you can see
 *why* the model flagged someone.
 
+**`sql/` — the referee.** Four DuckDB scripts (a tiny local database — no
+server) that recompute every number this project claims, straight from the
+cleaned table: seven data-quality checks, churn-rate views by every segment,
+the leaving-rate calculation the LTV model consumes, and a "claim check"
+query that reproduces each README headline. If the Python analysis and the
+README ever disagreed, this layer is how you'd catch it. It also exports the
+small tables the Power BI dashboard reads.
+
+**`power-bi/` — the stakeholder view.** A three-page dashboard (.pbix you
+can open in the free Power BI Desktop): the executive retention overview,
+churn diagnostics, and a value-and-action page with the LTV figures,
+at-risk segments and the three costed interventions. It reads only the
+documented exports in `data/powerbi/` — nothing hidden — and the dashboard
+itself was generated from code (the text source sits next to the file), so
+even the DAX measures are reviewable.
+
 **`tests/` — the safety net.** ~30 automated checks that the cleaning
 handles the known data quirks, the LTV math matches hand-computed answers,
 and the evaluation logic is correct. Run them with one command (`pytest`);
@@ -311,6 +327,15 @@ design, and `tests/test_ltv.py` to show the math is verified, not vibes.
 > really front-loaded. I handled that with cohort framing, caps, and
 > sensitivity ranges — but with timestamped data I'd build a proper survival
 > model, and that's the first upgrade I'd make."
+
+**"How do SQL and Power BI fit in?"**
+
+> "SQL is my validation layer — DuckDB views that recompute every churn rate
+> and KPI from the cleaned table, including one query that literally
+> re-derives each number quoted in the README. Python keeps the parts SQL is
+> wrong for: discounted cash-flow math and the classifier. Power BI is the
+> presentation layer on top, reading only the exported tables. Three tools,
+> one set of definitions — and the SQL is the referee if anything drifts."
 
 **"Walk me through the LTV function."** *(the most likely code question)*
 

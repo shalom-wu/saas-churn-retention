@@ -1,0 +1,4 @@
+option,name,what,year1_net_pv,roi_multiple,key_risk,confidence
+A,Contract-shift incentive,"""12 months for the price of 11"" offer moving month-to-month customers to annual contracts",134000,6.0,Discounts some customers who would have stayed anyway (50% haircut applied),High
+B,Model-targeted saves,Score the book monthly; retention offers to the riskiest 20% by model score,231000,4.7,Offer fatigue; model precision decays without quarterly retraining,Medium-high
+C,Premium onboarding bundle,Bundle tech support + online security free for 6 months for new fiber customers,37000,3.4,Add-on effect may be self-selection - pilot as a 500-customer A/B test,Medium

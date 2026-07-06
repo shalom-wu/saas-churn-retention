@@ -1,0 +1,4 @@
+Contract,customers,churn_rate,mrr,mrr_lost_to_churn,avg_monthly_charge
+Month-to-month,3875,0.4271,257294.15,120847.1,66.4
+One year,1473,0.1127,95816.6,14118.45,65.05
+Two year,1695,0.0283,103005.85,4165.3,60.77

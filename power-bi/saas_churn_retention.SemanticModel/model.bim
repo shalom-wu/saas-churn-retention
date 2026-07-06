@@ -1,0 +1,541 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "expressions": [
+      {
+        "name": "DataFolder",
+        "kind": "m",
+        "expression": [
+          "\"C:\\Users\\shalo\\OneDrive\\Desktop\\saas-churn-retention\\data\\powerbi\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "fact_customers",
+        "columns": [
+          {
+            "name": "customerID",
+            "dataType": "string",
+            "sourceColumn": "customerID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "gender",
+            "dataType": "string",
+            "sourceColumn": "gender",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SeniorCitizen",
+            "dataType": "string",
+            "sourceColumn": "SeniorCitizen",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Partner",
+            "dataType": "string",
+            "sourceColumn": "Partner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Dependents",
+            "dataType": "string",
+            "sourceColumn": "Dependents",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tenure",
+            "dataType": "int64",
+            "sourceColumn": "tenure",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "tenure_band",
+            "dataType": "string",
+            "sourceColumn": "tenure_band",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Contract",
+            "dataType": "string",
+            "sourceColumn": "Contract",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PaymentMethod",
+            "dataType": "string",
+            "sourceColumn": "PaymentMethod",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "InternetService",
+            "dataType": "string",
+            "sourceColumn": "InternetService",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "n_addon_services",
+            "dataType": "int64",
+            "sourceColumn": "n_addon_services",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "MonthlyCharges",
+            "dataType": "double",
+            "sourceColumn": "MonthlyCharges",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "charge_tier",
+            "dataType": "string",
+            "sourceColumn": "charge_tier",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TotalCharges",
+            "dataType": "double",
+            "sourceColumn": "TotalCharges",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "Churn",
+            "dataType": "string",
+            "sourceColumn": "Churn",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "churn_flag",
+            "dataType": "int64",
+            "sourceColumn": "churn_flag",
+            "summarizeBy": "none",
+            "formatString": "0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_customers",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\fact_customers.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"customerID\", type text}, {\"gender\", type text}, {\"SeniorCitizen\", type text}, {\"Partner\", type text}, {\"Dependents\", type text}, {\"tenure\", Int64.Type}, {\"tenure_band\", type text}, {\"Contract\", type text}, {\"PaymentMethod\", type text}, {\"InternetService\", type text}, {\"n_addon_services\", Int64.Type}, {\"MonthlyCharges\", type number}, {\"charge_tier\", type text}, {\"TotalCharges\", type number}, {\"Churn\", type text}, {\"churn_flag\", Int64.Type}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Customers",
+            "expression": "COUNTROWS ( fact_customers )",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Churned Customers",
+            "expression": "CALCULATE ( [Customers], fact_customers[churn_flag] = 1 )",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Churn Rate",
+            "expression": "DIVIDE ( [Churned Customers], [Customers] )",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "MRR",
+            "expression": "SUM ( fact_customers[MonthlyCharges] )",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "MRR Lost to Churn",
+            "expression": "CALCULATE ( [MRR], fact_customers[churn_flag] = 1 )",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "MRR Lost %",
+            "expression": "DIVIDE ( [MRR Lost to Churn], [MRR] )",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Avg Monthly Charge",
+            "expression": "AVERAGE ( fact_customers[MonthlyCharges] )",
+            "formatString": "$#,0.00"
+          },
+          {
+            "name": "Avg Tenure (months)",
+            "expression": "AVERAGE ( fact_customers[tenure] )",
+            "formatString": "0.0"
+          },
+          {
+            "name": "Share of Customers",
+            "expression": "DIVIDE ( [Customers], CALCULATE ( [Customers], ALLSELECTED ( fact_customers ) ) )",
+            "formatString": "0.0%"
+          }
+        ]
+      },
+      {
+        "name": "ltv_by_contract",
+        "columns": [
+          {
+            "name": "Contract",
+            "dataType": "string",
+            "sourceColumn": "Contract",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customers",
+            "dataType": "int64",
+            "sourceColumn": "customers",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "avg_monthly_revenue",
+            "dataType": "double",
+            "sourceColumn": "avg_monthly_revenue",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "monthly_churn_hazard",
+            "dataType": "double",
+            "sourceColumn": "monthly_churn_hazard",
+            "summarizeBy": "none",
+            "formatString": "0.00%"
+          },
+          {
+            "name": "expected_lifetime_months",
+            "dataType": "double",
+            "sourceColumn": "expected_lifetime_months",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          },
+          {
+            "name": "avg_ltv",
+            "dataType": "double",
+            "sourceColumn": "avg_ltv",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "cost_per_churn",
+            "dataType": "double",
+            "sourceColumn": "cost_per_churn",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "ltv_by_contract",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\ltv_by_contract.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Contract\", type text}, {\"customers\", Int64.Type}, {\"avg_monthly_revenue\", type number}, {\"monthly_churn_hazard\", type number}, {\"expected_lifetime_months\", type number}, {\"avg_ltv\", type number}, {\"cost_per_churn\", type number}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Avg Customer LTV",
+            "expression": "AVERAGE ( ltv_by_contract[avg_ltv] )",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "Avg Cost per Churn",
+            "expression": "AVERAGE ( ltv_by_contract[cost_per_churn] )",
+            "formatString": "$#,0"
+          }
+        ]
+      },
+      {
+        "name": "at_risk_segments",
+        "columns": [
+          {
+            "name": "segment",
+            "dataType": "string",
+            "sourceColumn": "segment",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customers",
+            "dataType": "int64",
+            "sourceColumn": "customers",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "churn_rate",
+            "dataType": "double",
+            "sourceColumn": "churn_rate",
+            "summarizeBy": "none",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "mrr",
+            "dataType": "double",
+            "sourceColumn": "mrr",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "mrr_lost_to_churn",
+            "dataType": "double",
+            "sourceColumn": "mrr_lost_to_churn",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "at_risk_segments",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\at_risk_segments.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"segment\", type text}, {\"customers\", Int64.Type}, {\"churn_rate\", type number}, {\"mrr\", type number}, {\"mrr_lost_to_churn\", type number}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "kpi_cost_of_churn",
+        "columns": [
+          {
+            "name": "churned_customers",
+            "dataType": "int64",
+            "sourceColumn": "churned_customers",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "lost_mrr",
+            "dataType": "double",
+            "sourceColumn": "lost_mrr",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "annualized_lost_revenue",
+            "dataType": "double",
+            "sourceColumn": "annualized_lost_revenue",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "foregone_ltv",
+            "dataType": "double",
+            "sourceColumn": "foregone_ltv",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "replacement_cac_total",
+            "dataType": "double",
+            "sourceColumn": "replacement_cac_total",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "total_cost_of_churn",
+            "dataType": "double",
+            "sourceColumn": "total_cost_of_churn",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "avg_cost_per_churned_customer",
+            "dataType": "double",
+            "sourceColumn": "avg_cost_per_churned_customer",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "kpi_cost_of_churn",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\kpi_cost_of_churn.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"churned_customers\", Int64.Type}, {\"lost_mrr\", type number}, {\"annualized_lost_revenue\", type number}, {\"foregone_ltv\", type number}, {\"replacement_cac_total\", type number}, {\"total_cost_of_churn\", type number}, {\"avg_cost_per_churned_customer\", type number}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Cost of Churned Cohort",
+            "expression": "MAX ( kpi_cost_of_churn[total_cost_of_churn] )",
+            "formatString": "$#,##0.0,, \"M\""
+          },
+          {
+            "name": "Annualized Lost Revenue",
+            "expression": "MAX ( kpi_cost_of_churn[annualized_lost_revenue] )",
+            "formatString": "$#,##0.0,, \"M\""
+          }
+        ]
+      },
+      {
+        "name": "kpi_churn_by_addons",
+        "columns": [
+          {
+            "name": "n_addon_services",
+            "dataType": "int64",
+            "sourceColumn": "n_addon_services",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "customers",
+            "dataType": "int64",
+            "sourceColumn": "customers",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "churn_rate",
+            "dataType": "double",
+            "sourceColumn": "churn_rate",
+            "summarizeBy": "none",
+            "formatString": "0.0%"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "kpi_churn_by_addons",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\kpi_churn_by_addons.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"n_addon_services\", Int64.Type}, {\"customers\", Int64.Type}, {\"churn_rate\", type number}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_interventions",
+        "columns": [
+          {
+            "name": "option",
+            "dataType": "string",
+            "sourceColumn": "option",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "name",
+            "dataType": "string",
+            "sourceColumn": "name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "what",
+            "dataType": "string",
+            "sourceColumn": "what",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "year1_net_pv",
+            "dataType": "int64",
+            "sourceColumn": "year1_net_pv",
+            "summarizeBy": "none",
+            "formatString": "$#,0"
+          },
+          {
+            "name": "roi_multiple",
+            "dataType": "double",
+            "sourceColumn": "roi_multiple",
+            "summarizeBy": "none",
+            "formatString": "0.0x"
+          },
+          {
+            "name": "key_risk",
+            "dataType": "string",
+            "sourceColumn": "key_risk",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "confidence",
+            "dataType": "string",
+            "sourceColumn": "confidence",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_interventions",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"\\dim_interventions.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"option\", type text}, {\"name\", type text}, {\"what\", type text}, {\"year1_net_pv\", Int64.Type}, {\"roi_multiple\", type number}, {\"key_risk\", type text}, {\"confidence\", type text}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "fact_to_ltv",
+        "fromTable": "fact_customers",
+        "fromColumn": "Contract",
+        "toTable": "ltv_by_contract",
+        "toColumn": "Contract"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      }
+    ]
+  }
+}

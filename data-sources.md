@@ -21,20 +21,18 @@ ones.
 
 ## Getting the data
 
-The raw file is **not redistributed in this repository** (it stays out of git
-via `.gitignore`). To reproduce the analysis, download it yourself:
+**The dataset is included in this repository** — `data/raw/` holds the file
+as pulled (2026-07-05, from IBM's public mirror) and `data/processed/` the
+cleaned table; see [data/data_manifest.md](data/data_manifest.md) for every
+file's provenance. Including it is appropriate because IBM publishes this
+file itself as sample data about fictional customers (no real PII):
 
-1. **From Kaggle:** download `WA_Fn-UseC_-Telco-Customer-Churn.csv` from the
-   [dataset page](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
-2. **Or from IBM's public mirror** (identical file):
+- Kaggle hosting: [blastchar/telco-customer-churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+- IBM's public mirror (identical file):
+  `https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv`
 
-   ```
-   https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv
-   ```
-
-3. Save it as `data/raw/telco-customer-churn.csv`
-
-Then run the pipeline (see README for details).
+Nothing needs downloading to run the project; the links are for anyone who
+wants to re-fetch the original.
 
 ## Known data quality issues
 

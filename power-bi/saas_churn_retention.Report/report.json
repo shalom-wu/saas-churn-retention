@@ -1,0 +1,255 @@
+{
+  "config": "{\"version\": \"5.43\", \"themeCollection\": {}}",
+  "layoutOptimization": 0,
+  "sections": [
+    {
+      "name": "page1",
+      "displayName": "Retention Overview",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "width": 1280,
+          "height": 68,
+          "config": "{\"name\": \"vc0001\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 0, \"width\": 1280, \"height\": 68}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"SaaS Customer Churn \\u2014 Retention Overview\", \"textStyle\": {\"fontSize\": \"20pt\", \"fontWeight\": \"bold\", \"color\": \"#FFFFFF\"}}]}, {\"textRuns\": [{\"value\": \"Executive view \\u00b7 7,043 customers \\u00b7 IBM Telco sample reframed as a subscription business\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#9FB3BE\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        },
+        {
+          "x": 0,
+          "y": 696,
+          "z": 0,
+          "width": 1280,
+          "height": 24,
+          "config": "{\"name\": \"vc0002\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 696, \"z\": 0, \"width\": 1280, \"height\": 24}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Source: IBM Telco Customer Churn sample dataset (via Kaggle) \\u00b7 reframed as a subscription business \\u00b7 LTV and intervention figures use documented assumptions (src/config.py)\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#8896A0\"}}]}]}}]}, \"drillFilterOtherVisuals\": true}}"
+        },
+        {
+          "x": 16,
+          "y": 84,
+          "z": 10,
+          "width": 196,
+          "height": 92,
+          "config": "{\"name\": \"vc0003\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 84, \"z\": 10, \"width\": 196, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.Customers\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"Customers\"}, \"Name\": \"fact_customers.Customers\", \"NativeReferenceName\": \"Customers\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Customers'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 224,
+          "y": 84,
+          "z": 11,
+          "width": 196,
+          "height": 92,
+          "config": "{\"name\": \"vc0004\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 224, \"y\": 84, \"z\": 11, \"width\": 196, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn Rate'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 432,
+          "y": 84,
+          "z": 12,
+          "width": 196,
+          "height": 92,
+          "config": "{\"name\": \"vc0005\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 432, \"y\": 84, \"z\": 12, \"width\": 196, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.MRR\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"MRR\"}, \"Name\": \"fact_customers.MRR\", \"NativeReferenceName\": \"MRR\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'MRR'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 640,
+          "y": 84,
+          "z": 13,
+          "width": 196,
+          "height": 92,
+          "config": "{\"name\": \"vc0006\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 640, \"y\": 84, \"z\": 13, \"width\": 196, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.MRR Lost to Churn\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"MRR Lost to Churn\"}, \"Name\": \"fact_customers.MRR Lost to Churn\", \"NativeReferenceName\": \"MRR Lost to Churn\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'MRR Lost to Churn'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 848,
+          "y": 84,
+          "z": 14,
+          "width": 200,
+          "height": 92,
+          "config": "{\"name\": \"vc0007\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 848, \"y\": 84, \"z\": 14, \"width\": 200, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"kpi_cost_of_churn.Cost of Churned Cohort\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"k\", \"Entity\": \"kpi_cost_of_churn\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"k\"}}, \"Property\": \"Cost of Churned Cohort\"}, \"Name\": \"kpi_cost_of_churn.Cost of Churned Cohort\", \"NativeReferenceName\": \"Cost of Churned Cohort\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Cost of Churned Cohort'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 1076,
+          "y": 84,
+          "z": 15,
+          "width": 188,
+          "height": 92,
+          "config": "{\"name\": \"vc0008\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1076, \"y\": 84, \"z\": 15, \"width\": 188, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.Contract\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"Contract\"}, \"Name\": \"fact_customers.Contract\", \"NativeReferenceName\": \"Contract\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Contract'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 16,
+          "y": 200,
+          "z": 20,
+          "width": 500,
+          "height": 260,
+          "config": "{\"name\": \"vc0009\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 200, \"z\": 20, \"width\": 500, \"height\": 260}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_customers.Contract\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Contract\"}, \"Name\": \"fact_customers.Contract\", \"NativeReferenceName\": \"Contract\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#D64550'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn rate by contract type \\u2014 the fault line'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 540,
+          "y": 200,
+          "z": 21,
+          "width": 500,
+          "height": 260,
+          "config": "{\"name\": \"vc0010\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 540, \"y\": 200, \"z\": 21, \"width\": 500, \"height\": 260}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_customers.tenure_band\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"tenure_band\"}, \"Name\": \"fact_customers.tenure_band\", \"NativeReferenceName\": \"tenure_band\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"tenure_band\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#1F7A8C'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn by tenure \\u2014 risk is front-loaded'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 16,
+          "y": 480,
+          "z": 30,
+          "width": 1248,
+          "height": 200,
+          "config": "{\"name\": \"vc0011\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 480, \"z\": 30, \"width\": 1248, \"height\": 200}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"What this says\", \"textStyle\": {\"fontSize\": \"12pt\", \"fontWeight\": \"bold\", \"color\": \"#26343F\"}}]}, {\"textRuns\": [{\"value\": \"26.5% of the book churned, taking 31% of MRR with it \\u2014 churners skew premium ($74 vs $61/month). The problem concentrates where contracts are loose and tenure is short: month-to-month customers churn at 43% vs 3% on two-year deals, and over half of first-half-year customers leave. Priced with the LTV model (70% margin, $400 replacement CAC, 10% discount \\u2014 all documented assumptions), the churned cohort cost ~$4.5M. Pages 2-3 break down where it leaks and what to do about it.\", \"textStyle\": {\"fontSize\": \"11pt\", \"color\": \"#41505B\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#FDF6EC'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        }
+      ],
+      "ordinal": 0
+    },
+    {
+      "name": "page2",
+      "displayName": "Churn Diagnostics",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "width": 1280,
+          "height": 68,
+          "config": "{\"name\": \"vc0012\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 0, \"width\": 1280, \"height\": 68}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Churn Diagnostics\", \"textStyle\": {\"fontSize\": \"20pt\", \"fontWeight\": \"bold\", \"color\": \"#FFFFFF\"}}]}, {\"textRuns\": [{\"value\": \"Where churn concentrates: payment method, price tier, add-on depth\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#9FB3BE\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        },
+        {
+          "x": 0,
+          "y": 696,
+          "z": 0,
+          "width": 1280,
+          "height": 24,
+          "config": "{\"name\": \"vc0013\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 696, \"z\": 0, \"width\": 1280, \"height\": 24}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Source: IBM Telco Customer Churn sample dataset (via Kaggle) \\u00b7 reframed as a subscription business \\u00b7 LTV and intervention figures use documented assumptions (src/config.py)\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#8896A0\"}}]}]}}]}, \"drillFilterOtherVisuals\": true}}"
+        },
+        {
+          "x": 16,
+          "y": 84,
+          "z": 10,
+          "width": 610,
+          "height": 280,
+          "config": "{\"name\": \"vc0014\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 84, \"z\": 10, \"width\": 610, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_customers.PaymentMethod\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"PaymentMethod\"}, \"Name\": \"fact_customers.PaymentMethod\", \"NativeReferenceName\": \"PaymentMethod\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#D64550'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn by payment method \\u2014 the electronic-check red flag'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 650,
+          "y": 84,
+          "z": 11,
+          "width": 400,
+          "height": 280,
+          "config": "{\"name\": \"vc0015\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 650, \"y\": 84, \"z\": 11, \"width\": 400, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_customers.charge_tier\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"charge_tier\"}, \"Name\": \"fact_customers.charge_tier\", \"NativeReferenceName\": \"charge_tier\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"charge_tier\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#F4A259'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn by monthly-charge tier'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 1076,
+          "y": 84,
+          "z": 12,
+          "width": 188,
+          "height": 92,
+          "config": "{\"name\": \"vc0016\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1076, \"y\": 84, \"z\": 12, \"width\": 188, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.InternetService\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"InternetService\"}, \"Name\": \"fact_customers.InternetService\", \"NativeReferenceName\": \"InternetService\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'InternetService'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 1076,
+          "y": 190,
+          "z": 13,
+          "width": 188,
+          "height": 92,
+          "config": "{\"name\": \"vc0017\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1076, \"y\": 190, \"z\": 13, \"width\": 188, \"height\": 92}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_customers.SeniorCitizen\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"f\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"f\"}}, \"Property\": \"SeniorCitizen\"}, \"Name\": \"fact_customers.SeniorCitizen\", \"NativeReferenceName\": \"SeniorCitizen\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'SeniorCitizen'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 16,
+          "y": 390,
+          "z": 20,
+          "width": 610,
+          "height": 280,
+          "config": "{\"name\": \"vc0018\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 390, \"z\": 20, \"width\": 610, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"kpi_churn_by_addons.n_addon_services\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"kpi_churn_by_addons\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"n_addon_services\"}, \"Name\": \"kpi_churn_by_addons.n_addon_services\", \"NativeReferenceName\": \"n_addon_services\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"n_addon_services\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#1F7A8C'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn by add-on count (internet customers) \\u2014 add-ons anchor'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 650,
+          "y": 390,
+          "z": 21,
+          "width": 400,
+          "height": 280,
+          "config": "{\"name\": \"vc0019\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 650, \"y\": 390, \"z\": 21, \"width\": 400, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_customers.InternetService\", \"active\": true}], \"Y\": [{\"queryRef\": \"fact_customers.Churn Rate\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_customers\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"InternetService\"}, \"Name\": \"fact_customers.InternetService\", \"NativeReferenceName\": \"InternetService\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}, \"Name\": \"fact_customers.Churn Rate\", \"NativeReferenceName\": \"Churn Rate\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Churn Rate\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#1F7A8C'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Churn by internet service \\u2014 fiber's price/value problem'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 1076,
+          "y": 390,
+          "z": 22,
+          "width": 188,
+          "height": 280,
+          "config": "{\"name\": \"vc0020\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1076, \"y\": 390, \"z\": 22, \"width\": 188, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Reading tip\", \"textStyle\": {\"fontSize\": \"10pt\", \"fontWeight\": \"bold\", \"color\": \"#26343F\"}}]}, {\"textRuns\": [{\"value\": \"Rates are cohort shares of the snapshot, not monthly rates. The add-on chart uses the SQL aggregate (internet customers only).\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#41505B\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#F2F6F8'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        }
+      ],
+      "ordinal": 1
+    },
+    {
+      "name": "page3",
+      "displayName": "Value & Action",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "width": 1280,
+          "height": 68,
+          "config": "{\"name\": \"vc0021\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 0, \"width\": 1280, \"height\": 68}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Customer Value & Retention Actions\", \"textStyle\": {\"fontSize\": \"20pt\", \"fontWeight\": \"bold\", \"color\": \"#FFFFFF\"}}]}, {\"textRuns\": [{\"value\": \"What a lost customer costs, who is at risk, and the three costed interventions\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#9FB3BE\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        },
+        {
+          "x": 0,
+          "y": 696,
+          "z": 0,
+          "width": 1280,
+          "height": 24,
+          "config": "{\"name\": \"vc0022\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 696, \"z\": 0, \"width\": 1280, \"height\": 24}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Source: IBM Telco Customer Churn sample dataset (via Kaggle) \\u00b7 reframed as a subscription business \\u00b7 LTV and intervention figures use documented assumptions (src/config.py)\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#8896A0\"}}]}]}}]}, \"drillFilterOtherVisuals\": true}}"
+        },
+        {
+          "x": 16,
+          "y": 84,
+          "z": 10,
+          "width": 490,
+          "height": 250,
+          "config": "{\"name\": \"vc0023\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 84, \"z\": 10, \"width\": 490, \"height\": 250}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"ltv_by_contract.Contract\", \"active\": true}], \"Y\": [{\"queryRef\": \"ltv_by_contract.Avg Customer LTV\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"ltv_by_contract\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Contract\"}, \"Name\": \"ltv_by_contract.Contract\", \"NativeReferenceName\": \"Contract\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Customer LTV\"}, \"Name\": \"ltv_by_contract.Avg Customer LTV\", \"NativeReferenceName\": \"Avg Customer LTV\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Customer LTV\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#1F7A8C'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Discounted LTV by contract (src/ltv.py)'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 16,
+          "y": 350,
+          "z": 11,
+          "width": 490,
+          "height": 250,
+          "config": "{\"name\": \"vc0024\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 16, \"y\": 350, \"z\": 11, \"width\": 490, \"height\": 250}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"ltv_by_contract.Contract\", \"active\": true}], \"Y\": [{\"queryRef\": \"ltv_by_contract.Avg Cost per Churn\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"ltv_by_contract\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Contract\"}, \"Name\": \"ltv_by_contract.Contract\", \"NativeReferenceName\": \"Contract\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Cost per Churn\"}, \"Name\": \"ltv_by_contract.Avg Cost per Churn\", \"NativeReferenceName\": \"Avg Cost per Churn\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Cost per Churn\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"dataPoint\": [{\"properties\": {\"defaultColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#D64550'\"}}}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'All-in cost of losing one customer (LTV + $400 CAC)'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 530,
+          "y": 84,
+          "z": 20,
+          "width": 734,
+          "height": 220,
+          "config": "{\"name\": \"vc0025\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 530, \"y\": 84, \"z\": 20, \"width\": 734, \"height\": 220}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"at_risk_segments.segment\"}, {\"queryRef\": \"at_risk_segments.customers\"}, {\"queryRef\": \"at_risk_segments.churn_rate\"}, {\"queryRef\": \"at_risk_segments.mrr\"}, {\"queryRef\": \"at_risk_segments.mrr_lost_to_churn\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"at_risk_segments\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"segment\"}, \"Name\": \"at_risk_segments.segment\", \"NativeReferenceName\": \"segment\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"customers\"}, \"Name\": \"at_risk_segments.customers\", \"NativeReferenceName\": \"customers\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"churn_rate\"}, \"Name\": \"at_risk_segments.churn_rate\", \"NativeReferenceName\": \"churn_rate\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"mrr\"}, \"Name\": \"at_risk_segments.mrr\", \"NativeReferenceName\": \"mrr\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"mrr_lost_to_churn\"}, \"Name\": \"at_risk_segments.mrr_lost_to_churn\", \"NativeReferenceName\": \"mrr_lost_to_churn\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'At-risk segments (overlapping, targetable)'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 530,
+          "y": 320,
+          "z": 21,
+          "width": 734,
+          "height": 200,
+          "config": "{\"name\": \"vc0026\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 530, \"y\": 320, \"z\": 21, \"width\": 734, \"height\": 200}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_interventions.option\"}, {\"queryRef\": \"dim_interventions.name\"}, {\"queryRef\": \"dim_interventions.year1_net_pv\"}, {\"queryRef\": \"dim_interventions.roi_multiple\"}, {\"queryRef\": \"dim_interventions.confidence\"}, {\"queryRef\": \"dim_interventions.key_risk\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_interventions\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"option\"}, \"Name\": \"dim_interventions.option\", \"NativeReferenceName\": \"option\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"name\"}, \"Name\": \"dim_interventions.name\", \"NativeReferenceName\": \"name\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"year1_net_pv\"}, \"Name\": \"dim_interventions.year1_net_pv\", \"NativeReferenceName\": \"year1_net_pv\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"roi_multiple\"}, \"Name\": \"dim_interventions.roi_multiple\", \"NativeReferenceName\": \"roi_multiple\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"confidence\"}, \"Name\": \"dim_interventions.confidence\", \"NativeReferenceName\": \"confidence\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"key_risk\"}, \"Name\": \"dim_interventions.key_risk\", \"NativeReferenceName\": \"key_risk\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Interventions \\u2014 year-1 net PV under conservative, documented assumptions'\"}}}, \"fontColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#26343F'\"}}}}}, \"fontSize\": {\"expr\": {\"Literal\": {\"Value\": \"11D\"}}}}}]}}}"
+        },
+        {
+          "x": 530,
+          "y": 536,
+          "z": 30,
+          "width": 734,
+          "height": 148,
+          "config": "{\"name\": \"vc0027\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 530, \"y\": 536, \"z\": 30, \"width\": 734, \"height\": 148}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Recommendation\", \"textStyle\": {\"fontSize\": \"11pt\", \"fontWeight\": \"bold\", \"color\": \"#26343F\"}}]}, {\"textRuns\": [{\"value\": \"Run A + B together (one campaign: contract-shift offers, prioritized by model score); pilot C as a 500-customer A/B test. Expected year-1 net impact ~$0.4M against a $4.5M/year problem. These are decision-support estimates with stated take-up and save-rate assumptions \\u2014 not guaranteed outcomes.\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#41505B\"}}]}]}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#FDF6EC'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}]}}}"
+        }
+      ],
+      "ordinal": 2
+    }
+  ]
+}

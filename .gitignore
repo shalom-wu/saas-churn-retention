@@ -1,8 +1,6 @@
-# Data — the raw dataset is not redistributed (see data-sources.md)
-data/raw/
-data/processed/
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+# Data is included in the repo: the IBM Telco sample file is small (~1MB)
+# and publicly redistributed by IBM itself (see data-sources.md and
+# data/data_manifest.md). Nothing to ignore here.
 
 # Python
 __pycache__/
@@ -35,3 +33,7 @@ Thumbs.db
 models/
 *.pkl
 *.joblib
+
+# Power BI local artifacts
+*.pbix.bak
+**/.pbi/

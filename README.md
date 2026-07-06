@@ -38,6 +38,9 @@ transfer directly, and the reframing is stated everywhere it matters. See
 | [reports/figures/](reports/figures) | Every chart as a standalone PNG |
 | [explainer-guide/](explainer-guide/explain-it-to-me.md) | The whole project explained for a non-technical reader, with a glossary |
 | [tests/](tests) | ~30 pytest checks on the cleaning, LTV math, and evaluation logic |
+| [sql/](sql) | DuckDB validation layer: 7 data-quality checks, the KPI views behind every quoted number, and a claim-check query that recomputes the README headlines |
+| [power-bi/](power-bi) | 3-page dashboard (.pbix + text source): retention overview, churn diagnostics, value & action |
+| [data/](data/data_manifest.md) | **All data included** — raw file, cleaned table, and Power BI inputs, each documented in the manifest |
 
 ## Methodology (short version)
 
@@ -67,10 +70,9 @@ transfer directly, and the reframing is stated everywhere it matters. See
 git clone https://github.com/shalom-wu/saas-churn-retention.git && cd saas-churn-retention
 pip install -r requirements.txt
 
-# Get the data (not redistributed here — see data-sources.md):
-#   save as data/raw/telco-customer-churn.csv
-
+# The dataset is included in data/ (IBM sample data — see data/data_manifest.md)
 python -m src.run_pipeline   # regenerates all figures + metrics (~1 min)
+python scripts/run_sql.py    # data-quality checks, KPI views, Power BI exports
 pytest                       # run the test suite
 ```
 
@@ -95,8 +97,66 @@ Python 3.11+ recommended. Notebooks re-execute with
   specific coefficients are not.
 - Full discussion: [reports/model-report.md](reports/model-report.md).
 
+## SQL and Power BI layer
+
+**SQL (DuckDB, [sql/](sql))** is the validation and KPI reference: seven
+data-quality checks (it confirms the 11 zero-tenure rows and zero
+duplicates), churn/MRR views by contract, tenure, payment, price tier and
+add-on depth, the exposure-based churn hazard that feeds the LTV model, and
+a claim-check view that recomputes every number quoted in this README —
+`python scripts/run_sql.py` runs it all and writes the Power BI inputs to
+`data/powerbi/`. Start with `sql/kpi_views.sql`, then Q8 in
+`sql/analysis_queries.sql`.
+
+**Power BI ([power-bi/](power-bi))** is the stakeholder view: a 3-page
+.pbix (Retention Overview with the headline KPIs, Churn Diagnostics,
+Value & Action with LTV, at-risk segments and the costed interventions),
+built from the SQL exports plus the Python LTV tables. Model, DAX and
+refresh steps are documented next to the file; refresh is one click after
+rerunning the exporter.
+
+The handoff is deliberate: SQL owns counting and rates, Python owns the
+finance math (discounting) and modeling, Power BI presents both.
+
+![Power BI — Retention Overview (actual Desktop capture)](power-bi/screenshots/pbix_page1_retention_overview.png)
+
+## Portfolio Use
+
+**CV bullets**
+
+- Built an end-to-end churn analysis on 7,043 subscription customers: a
+  cost-of-churn model pricing the churned cohort at $4.5M (sensitivity
+  $3.3–6.3M), churn prediction (XGBoost, test ROC-AUC 0.844), and three
+  costed retention interventions (~$0.4M year-1 net PV at ~5x ROI).
+- Implemented every churn KPI twice — DuckDB SQL views as the reference and
+  pandas as the analysis layer — with a claim-check query that recomputes
+  each README headline against the raw table.
+- Delivered a 3-page Power BI dashboard (.pbix + generated text source)
+  translating the LTV model and at-risk segmentation into an executive
+  retention view.
+
+**LinkedIn description**
+
+> SaaS Customer Churn Analysis & Retention Strategy — Python, SQL and Power
+> BI on the public IBM Telco dataset, reframed as a subscription business.
+> The original work is the economics: an assumption-explicit LTV /
+> cost-of-churn model ($4.5M cohort cost, stress-tested), an honest
+> modeling comparison (gradient boosting barely beats logistic regression —
+> and I say so), and three costed interventions. DuckDB validates every
+> quoted number; Power BI turns it into a 3-page retention dashboard.
+
+**Interview: how the tools work together**
+
+> "SQL is the reproducible validation and aggregation layer — every churn
+> rate and KPI is a DuckDB view, including a query that recomputes the
+> README's claims. Python does the heavier lifting: the discounted LTV
+> model, the churn classifier, the sensitivity analysis. Power BI sits on
+> top as the stakeholder dashboard, reading only documented exports. That
+> mirrors how analytics actually ships in a business: not one tool, but a
+> workflow from raw data to decision-ready reporting."
+
 ## Author
 
 Shalom Wu ([@shalom-wu](https://github.com/shalom-wu)) — analysis, cost
-model, and strategy. Dataset credit: IBM / Kaggle
+model, and strategy. Dataset credit: IBM sample data, hosted on Kaggle
 (`blastchar/telco-customer-churn`). MIT licensed.

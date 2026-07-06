@@ -1,0 +1,4 @@
+Contract,customers,churned,customer_months,monthly_churn_hazard,expected_lifetime_months
+One year,1473,166,61933,0.00268,72.0
+Month-to-month,3875,1655,69892,0.02368,42.2
+Two year,1695,48,96176,0.0005,72.0

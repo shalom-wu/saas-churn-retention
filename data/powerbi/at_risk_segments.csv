@@ -1,0 +1,5 @@
+segment,customers,churn_rate,mrr,mrr_lost_to_churn
+New month-to-month (tenure <= 12m),1994,0.5135,116086.5,68301.45
+"Fiber, no support/security add-ons",1765,0.5501,151963.75,82817.75
+Month-to-month + electronic check,1850,0.5373,138730.55,77315.6
+"Premium charges ($90+), first year",219,0.758,21156.05,16079.0
