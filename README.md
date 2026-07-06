@@ -1,115 +1,88 @@
-# Customer Churn Analysis & Retention Strategy
+# Customer Churn Analysis And Retention Strategy
 
-This repository analyzes churn in the public Telco Customer Churn dataset, framed as a subscription business. The workflow combines data cleaning, segment analysis, LTV/cost-of-churn calculations, predictive modeling, and a retention scenario.
+This repository analyzes churn in the public Telco Customer Churn dataset, framed as a subscription business. The workflow combines data cleaning, segment analysis, LTV and cost-of-churn calculations, predictive modeling, and a retention scenario.
 
-See [data-sources.md](data-sources.md) for source notes and caveats.
+## Project Summary
 
-## Key findings| # | Finding | Number |
+| Area | Details |
+|---|---|
+| Business question | Which customers are most likely to churn, what is the economic cost, and which retention actions are worth funding? |
+| Data | Public Telco Customer Churn sample dataset, reframed as a subscription/SaaS-style business case. |
+| Methods | Cohort analysis, LTV modeling, churn hazard estimation, logistic regression, XGBoost, SHAP, intervention ROI modeling. |
+| Main outputs | Strategy deck, model report, figures, Power BI dashboard, SQL KPI exports. |
+| Tools | Python, pytest, DuckDB SQL, Power BI, `.pbix` dashboard. |
+
+## Key Findings
+
+| # | Finding | Evidence |
 |---|---|---|
-| 1 | Full economic cost of the churned cohort (foregone LTV + replacement CAC) | **$4.5M** (range $3.3–6.3M) |
-| 2 | Churn by contract type — the fault line of the business | **43%** month-to-month vs **3%** two-year |
-| 3 | Churn in the first 6 months of tenure (risk is front-loaded) | **53%** |
-| 4 | Churn in the $70–90 price tier — the premium tier leaks most, and $70+ holds 71% of MRR | **38%** |
-| 5 | Retention gradient across add-on services (0 → 6 add-ons) | **52% → 5%** |
-| 6 | XGBoost model precision in the riskiest decile (2.9x lift vs random) | **77%** |
-| 7 | Year-1 net PV of the recommended interventions, conservative assumptions | **~$0.4M** (~5x ROI) |
+| 1 | Churn has a large economic cost. | Estimated churned-cohort cost is about $4.5M, with a sensitivity range of $3.3M-$6.3M. |
+| 2 | Contract type is the clearest business fault line. | Month-to-month customers churn at 43% versus 3% for two-year contracts. |
+| 3 | Risk is front-loaded. | Churn in the first six months of tenure is about 53%. |
+| 4 | The premium price tier leaks value. | The $70-$90 price tier churns at about 38%, and $70+ customers hold most MRR. |
+| 5 | The model is useful for campaign targeting. | The riskiest decile reaches 77% precision, about 2.9x random targeting. |
+| 6 | The recommended interventions clear the ROI screen. | Conservative year-1 net present value is about $0.4M, roughly 5x ROI under the stated assumptions. |
 
 ![Churn by contract type](reports/figures/fig_churn_by_contract.png)
 
-## Repository contents
+## Data
 
-| | |
+The project uses the public Telco Customer Churn dataset hosted on Kaggle and commonly attributed to IBM sample data. Source notes and caveats are documented in [data-sources.md](data-sources.md) and [data/data_manifest.md](data/data_manifest.md).
+
+The dataset is a static customer snapshot. It does not include true event timestamps, acquisition costs, customer acquisition channels, or actual gross margin. Business-dollar assumptions are explicit and centralized in [src/config.py](src/config.py).
+
+## Methodology
+
+1. Clean `TotalCharges`, derive tenure bands, price tiers, add-on counts, and segment labels.
+2. Analyze churn by contract, tenure, payment method, price tier, add-ons, and at-risk segments.
+3. Estimate customer lifetime value using exposure-based churn hazard, gross margin, discount rate, and replacement CAC assumptions.
+4. Train class-weighted logistic regression and XGBoost models; evaluate with ROC-AUC, PR-AUC, precision, recall, and campaign-depth metrics.
+5. Translate model and segment findings into contract, onboarding, and save-offer interventions with conservative deadweight haircuts.
+
+## Repository Contents
+
+| Path | Purpose |
 |---|---|
-| [notebooks/](notebooks) | Three executed walkthroughs: cleaning + EDA, the LTV/cost-of-churn model, and predictive modeling |
-| [src/](src) | All logic as tested modules — [config.py](src/config.py) holds every business assumption in one place |
-| [reports/strategy-deck.md](reports/strategy-deck.md) / [.pptx](reports/strategy-deck.pptx) | 7-slide strategy deck: problem → drivers → cost of inaction → options → recommendation |
-| [reports/model-report.md](reports/model-report.md) | Model performance and limitations |
-| [reports/figures/](reports/figures) | Every chart as a standalone PNG |
-| [tests/](tests) | ~30 pytest checks on the cleaning, LTV math, and evaluation logic |
-| [sql/](sql) | DuckDB validation layer: 7 data-quality checks, the KPI views behind every quoted number, and a claim-check query that recomputes the README headlines |
-| [power-bi/](power-bi) | 3-page dashboard (.pbix + text source): retention overview, churn diagnostics, value & action |
-| [data/](data/data_manifest.md) | **All data included** — raw file, cleaned table, and Power BI inputs, each documented in the manifest |
+| [notebooks/](notebooks) | Executed notebooks for cleaning, LTV/cost modeling, and predictive modeling. |
+| [src/](src) | Data prep, LTV, modeling, visualization, and pipeline code. |
+| [reports/](reports) | Strategy deck, model report, metrics, and figures. |
+| [sql/](sql) | DuckDB quality checks, KPI views, and claim checks. |
+| [power-bi/](power-bi) | Three-page Power BI dashboard, model notes, DAX, refresh steps, and screenshots. |
+| [data/](data) | Raw, cleaned, processed, and Power BI-ready data files. |
+| [tests/](tests) | Cleaning, LTV, and modeling tests. |
 
-## Methodology (short version)
+## Reproduce
 
-1. **Clean:** fix `TotalCharges` stored as text (11 blanks = unbilled new
-   customers, set to $0, not dropped); derive tenure bands, price tiers,
-   add-on counts. Documented in [notebook 01](notebooks/01-data-cleaning-eda.ipynb).
-2. **Descriptive:** churn rate by contract, tenure, payment method, price
-   tier, and service bundle; four named at-risk segments (each churns at ≥2x
-   the base rate).
-3. **Cost model:** exposure-based monthly churn hazard (events ÷
-   customer-months) → expected lifetime (capped at the 72-month data window)
-   → discounted LTV (70% gross margin, 10% discount rate) → cost of churn =
-   foregone LTV + $400 replacement CAC. Assumptions benchmarked to published
-   SaaS figures and stress-tested with a tornado sensitivity analysis.
-4. **Predict:** class-weighted logistic regression baseline, then shallow
-   XGBoost (test ROC-AUC 0.844 vs 0.838 — the reported result is that the
-   signal is mostly in a few strong features). Evaluated with PR-AUC and
-   precision/recall at campaign depth, not accuracy. Drivers via SHAP,
-   cross-checked against coefficients.
-5. **Recommend:** three costed interventions (contract-shift incentive,
-   model-targeted saves, onboarding-bundle pilot) with stated assumptions,
-   deadweight haircuts, and a phased rollout.
-
-## Reproducing the analysis
+Requires Python 3.11+.
 
 ```bash
-git clone https://github.com/shalom-wu/saas-churn-retention.git && cd saas-churn-retention
+git clone https://github.com/shalom-wu/saas-churn-retention-strategy.git
+cd saas-churn-retention-strategy
 pip install -r requirements.txt
 
-# The dataset is included in data/ (IBM sample data — see data/data_manifest.md)
-python -m src.run_pipeline   # regenerates all figures + metrics (~1 min)
-python scripts/run_sql.py    # data-quality checks, KPI views, Power BI exports
-pytest                       # run the test suite
+python -m src.run_pipeline
+python scripts/run_sql.py
+pytest
 ```
 
-Python 3.11+ recommended. Notebooks re-execute with
-`python -m nbconvert --to notebook --execute --inplace notebooks/*.ipynb`.
+The dataset is included in `data/`, so the analysis can run without a separate download.
+
+## Reporting Layer
+
+SQL is the validation and KPI reference layer. It checks the data, recomputes churn and MRR cuts, validates exposure-based churn hazards, and exports Power BI inputs to `data/powerbi/`.
+
+Power BI is the stakeholder dashboard layer. The [power-bi/](power-bi) folder includes a working `.pbix`, data model notes, DAX measures, refresh steps, screenshots, and dashboard documentation.
 
 ## Limitations
 
-- **Snapshot data.** No event timestamps, so the LTV model assumes a
-  constant churn hazard per segment (churn is actually front-loaded — with
-  timestamps this would be a survival model). Lifetimes are capped at the
-  observation window to limit extrapolation.
-- **The churn label's time window is unspecified.** 26.5% is treated as a
-  cohort share, never a monthly rate.
-- **Margin, CAC, and discount rate are industry benchmarks, not company
-  actuals.** They live in [src/config.py](src/config.py) and the tornado
-  chart shows exactly how much the headline moves when they're wrong.
-- **Correlation ≠ causation.** Contract type is partly self-selection; the
-  ROI model applies deadweight haircuts and the rollout plan requires A/B
-  tests before scaling.
-- **Telecom data in SaaS framing.** The method is the portable part; the
-  specific coefficients are not.
-- Full discussion: [reports/model-report.md](reports/model-report.md).
+- The dataset is a static snapshot with no true churn event dates.
+- The churn label's observation window is unspecified.
+- Margin, CAC, and discount rate are assumptions, not company actuals.
+- Contract type is correlated with churn but may include self-selection.
+- The telecom sample is used as a subscription-business proxy; the method is more portable than the exact coefficients.
 
-## SQL and Power BI layer
+## License And Credit
 
-**SQL (DuckDB, [sql/](sql))** is the validation and KPI reference: seven
-data-quality checks (it confirms the 11 zero-tenure rows and zero
-duplicates), churn/MRR views by contract, tenure, payment, price tier and
-add-on depth, the exposure-based churn hazard that feeds the LTV model, and
-a claim-check view that recomputes every number quoted in this README —
-`python scripts/run_sql.py` runs it all and writes the Power BI inputs to
-`data/powerbi/`. Start with `sql/kpi_views.sql`, then Q8 in
-`sql/analysis_queries.sql`.
+MIT License. Copyright (c) 2026 Shalom Wu.
 
-**Power BI ([power-bi/](power-bi))** is the dashboard layer: a 3-page
-.pbix (Retention Overview with the headline KPIs, Churn Diagnostics,
-Value & Action with LTV, at-risk segments and the costed interventions),
-built from the SQL exports plus the Python LTV tables. Model, DAX and
-refresh steps are documented next to the file; refresh is one click after
-rerunning the exporter.
-
-The handoff is deliberate: SQL owns counting and rates, Python owns the
-finance math (discounting) and modeling, Power BI presents both.
-
-![Power BI — Retention Overview (actual Desktop capture)](power-bi/screenshots/pbix_page1_retention_overview.png)
-
-## Author
-
-Shalom Wu ([@shalom-wu](https://github.com/shalom-wu)) — analysis, cost
-model, and strategy. Dataset credit: IBM sample data, hosted on Kaggle
-(`blastchar/telco-customer-churn`). MIT licensed.
+Data credit: IBM Telco Customer Churn sample data hosted on Kaggle (`blastchar/telco-customer-churn`). See [data-sources.md](data-sources.md) and [data/data_manifest.md](data/data_manifest.md).
