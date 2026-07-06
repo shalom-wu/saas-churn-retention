@@ -37,3 +37,8 @@ models/
 # Power BI local artifacts
 *.pbix.bak
 **/.pbi/
+data/powerbi/tmp_*.csv
+
+# Internal prep docs
+explainer-guide/
+docs/explain-it-to-me.md

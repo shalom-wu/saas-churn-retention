@@ -36,7 +36,6 @@ transfer directly, and the reframing is stated everywhere it matters. See
 | [reports/strategy-deck.md](reports/strategy-deck.md) / [.pptx](reports/strategy-deck.pptx) | 7-slide strategy deck: problem → drivers → cost of inaction → options → recommendation |
 | [reports/model-report.md](reports/model-report.md) | Model performance and limitations, written honestly |
 | [reports/figures/](reports/figures) | Every chart as a standalone PNG |
-| [explainer-guide/](explainer-guide/explain-it-to-me.md) | The whole project explained for a non-technical reader, with a glossary |
 | [tests/](tests) | ~30 pytest checks on the cleaning, LTV math, and evaluation logic |
 | [sql/](sql) | DuckDB validation layer: 7 data-quality checks, the KPI views behind every quoted number, and a claim-check query that recomputes the README headlines |
 | [power-bi/](power-bi) | 3-page dashboard (.pbix + text source): retention overview, churn diagnostics, value & action |

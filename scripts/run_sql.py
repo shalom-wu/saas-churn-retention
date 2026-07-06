@@ -46,22 +46,37 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     print("=== exports for Power BI ===")
     for view, fname in SQL_EXPORTS.items():
-        con.execute(f"COPY (SELECT * FROM {view}) TO '{(out / fname).as_posix()}' "
-                    f"(HEADER, DELIMITER ',')")
+        target = out / fname
+        try:
+            if target.exists():
+                target.unlink()
+            con.execute(f"COPY (SELECT * FROM {view}) TO '{target.as_posix()}' "
+                        f"(HEADER, DELIMITER ',')")
+        except (PermissionError, duckdb.IOException):
+            n = con.execute(f"SELECT COUNT(*) FROM {view}").fetchone()[0]
+            print(f"  {fname}: kept existing locked file; expected {n:,} rows")
+            continue
         n = con.execute(f"SELECT COUNT(*) FROM {view}").fetchone()[0]
         print(f"  {fname}: {n:,} rows")
 
     # customer-level fact table (analysis columns only, keeps the file lean).
     # tenure_band is zero-padded here so Power BI's alphabetical category
     # sort puts the bands in life-cycle order.
-    con.execute(
-        "COPY (SELECT customerID, gender, SeniorCitizen, Partner, Dependents, "
-        "tenure, CASE tenure_band WHEN '0-6m' THEN '00-06m' WHEN '7-12m' THEN '07-12m' "
-        "ELSE tenure_band END AS tenure_band, Contract, PaymentMethod, InternetService, "
-        "n_addon_services, MonthlyCharges, charge_tier, TotalCharges, "
-        "Churn, churn_flag FROM customers) TO "
-        f"'{(out / 'fact_customers.csv').as_posix()}' (HEADER, DELIMITER ',')")
-    print("  fact_customers.csv")
+    target = out / "fact_customers.csv"
+    try:
+        if target.exists():
+            target.unlink()
+        con.execute(
+            "COPY (SELECT customerID, gender, SeniorCitizen, Partner, Dependents, "
+            "tenure, CASE tenure_band WHEN '0-6m' THEN '00-06m' WHEN '7-12m' THEN '07-12m' "
+            "ELSE tenure_band END AS tenure_band, Contract, PaymentMethod, InternetService, "
+            "n_addon_services, MonthlyCharges, charge_tier, TotalCharges, "
+            "Churn, churn_flag FROM customers) TO "
+            f"'{target.as_posix()}' (HEADER, DELIMITER ',')")
+        print("  fact_customers.csv")
+    except (PermissionError, duckdb.IOException):
+        n = con.execute("SELECT COUNT(*) FROM customers").fetchone()[0]
+        print(f"  fact_customers.csv: kept existing locked file; expected {n:,} rows")
 
     # LTV by contract needs discounting -> computed by src/ltv.py (Python),
     # exported here so Power BI gets one consistent folder of inputs
@@ -71,11 +86,17 @@ def main() -> None:
     from src.ltv import cost_of_churn_summary, ltv_by_segment
     df = prepare(save=False)
     ltv = ltv_by_segment(df).reset_index()
-    ltv.to_csv(out / "ltv_by_contract.csv", index=False)
-    print(f"  ltv_by_contract.csv: {len(ltv)} rows (from src/ltv.py)")
+    try:
+        ltv.to_csv(out / "ltv_by_contract.csv", index=False)
+        print(f"  ltv_by_contract.csv: {len(ltv)} rows (from src/ltv.py)")
+    except PermissionError:
+        print(f"  ltv_by_contract.csv: kept existing locked file; expected {len(ltv)} rows")
     cost = cost_of_churn_summary(df)
-    pd.DataFrame([cost]).to_csv(out / "kpi_cost_of_churn.csv", index=False)
-    print("  kpi_cost_of_churn.csv: 1 row (from src/ltv.py, base-case assumptions)")
+    try:
+        pd.DataFrame([cost]).to_csv(out / "kpi_cost_of_churn.csv", index=False)
+        print("  kpi_cost_of_churn.csv: 1 row (from src/ltv.py, base-case assumptions)")
+    except PermissionError:
+        print("  kpi_cost_of_churn.csv: kept existing locked file; expected 1 row")
 
 
 if __name__ == "__main__":
